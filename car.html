@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>원광투어 - 렌터카 예약</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Square+Round:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Nanum Square Round', 'Noto Sans KR', Arial, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+    }
+    header {
+      background-color: #1996e7;
+      color: white;
+      padding: 28px 0 22px 0;
+      text-align: center;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      box-shadow: 0 2px 8px rgba(25,150,231,0.10);
+    }
+    .rentcar-search-section {
+      background: linear-gradient(120deg, #43cea2 0%, #185a9d 100%);
+      padding: 64px 0 48px 0;
+      position: relative;
+    }
+    .rentcar-search-box {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 32px rgba(25,150,231,0.12);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 32px;
+      position: relative;
+      z-index: 2;
+    }
+    .rentcar-search-box input,
+    .rentcar-search-box select {
+      font-family: inherit;
+      font-size: 1.05rem;
+      border: none;
+      background: #f5f7fa;
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-right: 14px;
+      min-width: 150px;
+      flex: 1 1 150px;
+      box-sizing: border-box;
+    }
+    .rentcar-search-box input:focus,
+    .rentcar-search-box select:focus {
+      outline: 2px solid #1996e7;
+    }
+    .rentcar-search-box .search-btn {
+      background: #43cea2;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      padding: 16px 34px;
+      cursor: pointer;
+      transition: background 0.2s;
+      min-width: 130px;
+    }
+    .rentcar-search-box .search-btn:hover {
+      background: #185a9d;
+    }
+    @media (max-width: 900px) {
+      .rentcar-search-box {
+        flex-direction: column;
+        gap: 16px;
+        padding: 22px 10px;
+      }
+      .rentcar-search-box input,
+      .rentcar-search-box select,
+      .rentcar-search-box .search-btn {
+        margin-right: 0;
+        width: 100%;
+        min-width: 0;
+      }
+    }
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(25,150,231,0.10);
+      padding: 40px 35px 50px 35px;
+    }
+    h2 {
+      color: #1996e7;
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .rentcar-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+    .rentcar-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(25,150,231,0.08);
+      overflow: hidden;
+      transition: transform 0.16s, box-shadow 0.16s;
+      border: 1.5px solid #e0eafc;
+      display: flex;
+      flex-direction: column;
+    }
+    .rentcar-card:hover {
+      transform: translateY(-6px) scale(1.025);
+      box-shadow: 0 8px 28px rgba(25,150,231,0.15);
+      border-color: #43cea2;
+    }
+    .rentcar-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      filter: brightness(0.98);
+      transition: filter 0.2s;
+    }
+    .rentcar-card:hover img {
+      filter: brightness(1.05) saturate(1.1);
+    }
+    .rentcar-info {
+      flex: 1;
+      padding: 20px 18px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .rentcar-title {
+      font-size: 1.13rem;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 8px;
+    }
+    .rentcar-location {
+      font-size: 0.98rem;
+      color: #1996e7;
+      margin-bottom: 10px;
+    }
+    .rentcar-desc {
+      font-size: 0.97rem;
+      color: #555;
+      margin-bottom: 16px;
+      min-height: 36px;
+    }
+    .rentcar-price {
+      color: #43cea2;
+      font-weight: bold;
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+    .reserve-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #43cea2 60%, #185a9d 100%);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 8px 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      margin-top: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(25,150,231,0.10);
+      transition: background 0.2s;
+    }
+    .reserve-btn:hover {
+      background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      color: #1996e7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 700px) {
+      .container { padding: 18px 4vw 30px 4vw; }
+      .rentcar-list { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+<header>원광투어 렌터카</header>
+<nav>
+  <ul style="display:flex; gap:20px; list-style:none; padding:0;">
+
+    <li><a href="flight.html">항공권</a></li>
+    <li><a href="hotel.html">호텔</a></li>
+    <li><a href="package.html">패키지</a></li>
+    <li><a href="car.html">렌터카</a></li>
+    <li><a href="free.html">테마여행</a></li>
+
+  </ul>
+</nav>
+
+<section class="rentcar-search-section">
+  <form class="rentcar-search-box">
+    <select>
+      <option value="">지역 선택</option>
+      <option>서울</option>
+      <option>제주</option>
+      <option>부산</option>
+      <option>도쿄</option>
+      <option>하와이</option>
+      <option>파리</option>
+    </select>
+    <input type="date" placeholder="대여일" />
+    <input type="date" placeholder="반납일" />
+    <select>
+      <option value="">차종 선택</option>
+      <option>경형/소형</option>
+      <option>중형</option>
+      <option>SUV</option>
+      <option>승합/밴</option>
+      <option>수입/고급</option>
+    </select>
+    <select>
+      <option value="">인원</option>
+      <option>2인</option>
+      <option>4인</option>
+      <option>6인</option>
+      <option>8인 이상</option>
+    </select>
+    <button type="submit" class="search-btn">렌터카 검색</button>
+  </form>
+</section>
+<div class="container">
+  <h2>지역별 인기 렌터카 대여소</h2>
+  <div class="rentcar-list">
+    <div class="rentcar-card">
+      <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=600&q=80" alt="제주 렌터카">
+      <div class="rentcar-info">
+        <div>
+          <div class="rentcar-title">제주 공항 렌터카</div>
+          <div class="rentcar-location">대한민국 · 제주</div>
+          <div class="rentcar-desc">제주국제공항 도보 5분, 다양한 차종, 24시간 운영</div>
+        </div>
+        <div>
+          <div class="rentcar-price">₩35,000~/1일</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="rentcar-card">
+      <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="서울 렌터카">
+      <div class="rentcar-info">
+        <div>
+          <div class="rentcar-title">서울 강남 렌터카</div>
+          <div class="rentcar-location">대한민국 · 서울</div>
+          <div class="rentcar-desc">강남역 인근, 신차 보유, 프리미엄 차량 선택 가능</div>
+        </div>
+        <div>
+          <div class="rentcar-price">₩45,000~/1일</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="rentcar-card">
+      <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80" alt="부산 렌터카">
+      <div class="rentcar-info">
+        <div>
+          <div class="rentcar-title">부산 해운대 렌터카</div>
+          <div class="rentcar-location">대한민국 · 부산</div>
+          <div class="rentcar-desc">해운대 해변 도보 3분, SUV/패밀리카 인기</div>
+        </div>
+        <div>
+          <div class="rentcar-price">₩40,000~/1일</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="rentcar-card">
+      <img src="https://images.unsplash.com/photo-1468421870903-4df1664ac249?auto=format&fit=crop&w=600&q=80" alt="도쿄 렌터카">
+      <div class="rentcar-info">
+        <div>
+          <div class="rentcar-title">도쿄 시내 렌터카</div>
+          <div class="rentcar-location">일본 · 도쿄</div>
+          <div class="rentcar-desc">도쿄역 도보 2분, 일본 내비/ETC 제공</div>
+        </div>
+        <div>
+          <div class="rentcar-price">₩60,000~/1일</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="rentcar-card">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="하와이 렌터카">
+      <div class="rentcar-info">
+        <div>
+          <div class="rentcar-title">하와이 와이키키 렌터카</div>
+          <div class="rentcar-location">미국 · 하와이</div>
+          <div class="rentcar-desc">와이키키 해변 인근, 오픈카/패밀리카 다양</div>
+        </div>
+        <div>
+          <div class="rentcar-price">₩80,000~/1일</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="rentcar-card">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="파리 렌터카">
+      <div class="rentcar-info">
+        <div>
+          <div class="rentcar-title">파리 샹젤리제 렌터카</div>
+          <div class="rentcar-location">프랑스 · 파리</div>
+          <div class="rentcar-desc">샹젤리제 거리 중심, 수입차/스포츠카 보유</div>
+        </div>
+        <div>
+          <div class="rentcar-price">₩120,000~/1일</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="../index.html" class="back-link">&larr; 메인으로 돌아가기</a>
+</div>
+</body>
+
+</html>

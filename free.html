@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>원광투어 - 테마여행</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Square+Round:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Nanum Square Round', 'Noto Sans KR', Arial, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+    }
+    header {
+      background-color: #1996e7;
+      color: white;
+      padding: 28px 0 22px 0;
+      text-align: center;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      box-shadow: 0 2px 8px rgba(25,150,231,0.10);
+    }
+    .theme-search-section {
+      background: linear-gradient(120deg, #f7971e 0%, #ffd200 100%);
+      padding: 64px 0 48px 0;
+      position: relative;
+    }
+    .theme-search-box {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 32px rgba(255,210,0,0.12);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 32px;
+      position: relative;
+      z-index: 2;
+    }
+    .theme-search-box input,
+    .theme-search-box select {
+      font-family: inherit;
+      font-size: 1.05rem;
+      border: none;
+      background: #f5f7fa;
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-right: 14px;
+      min-width: 150px;
+      flex: 1 1 150px;
+      box-sizing: border-box;
+    }
+    .theme-search-box input:focus,
+    .theme-search-box select:focus {
+      outline: 2px solid #f7971e;
+    }
+    .theme-search-box .search-btn {
+      background: #f7971e;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      padding: 16px 34px;
+      cursor: pointer;
+      transition: background 0.2s;
+      min-width: 130px;
+    }
+    .theme-search-box .search-btn:hover {
+      background: #ffd200;
+      color: #222;
+    }
+    @media (max-width: 900px) {
+      .theme-search-box {
+        flex-direction: column;
+        gap: 16px;
+        padding: 22px 10px;
+      }
+      .theme-search-box input,
+      .theme-search-box select,
+      .theme-search-box .search-btn {
+        margin-right: 0;
+        width: 100%;
+        min-width: 0;
+      }
+    }
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(25,150,231,0.10);
+      padding: 40px 35px 50px 35px;
+    }
+    h2 {
+      color: #f7971e;
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .theme-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 32px;
+    }
+    .theme-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(255,210,0,0.08);
+      overflow: hidden;
+      transition: transform 0.16s, box-shadow 0.16s;
+      border: 1.5px solid #ffe082;
+      display: flex;
+      flex-direction: column;
+    }
+    .theme-card:hover {
+      transform: translateY(-6px) scale(1.025);
+      box-shadow: 0 8px 28px rgba(255,210,0,0.15);
+      border-color: #f7971e;
+    }
+    .theme-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      filter: brightness(0.98);
+      transition: filter 0.2s;
+    }
+    .theme-card:hover img {
+      filter: brightness(1.05) saturate(1.1);
+    }
+    .theme-info {
+      flex: 1;
+      padding: 20px 18px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .theme-title {
+      font-size: 1.13rem;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 8px;
+    }
+    .theme-desc {
+      font-size: 0.97rem;
+      color: #555;
+      margin-bottom: 16px;
+      min-height: 36px;
+    }
+    .theme-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #f7971e 60%, #ffd200 100%);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 8px 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      margin-top: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(255,210,0,0.10);
+      transition: background 0.2s, color 0.2s;
+    }
+    .theme-btn:hover {
+      background: linear-gradient(90deg, #ffd200 0%, #f7971e 100%);
+      color: #222;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      color: #f7971e;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 700px) {
+      .container { padding: 18px 4vw 30px 4vw; }
+      .theme-list { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+<header>원광투어 테마여행</header>
+<nav>
+  <ul style="display:flex; gap:20px; list-style:none; padding:0;">
+
+    <li><a href="flight.html">항공권</a></li>
+    <li><a href="hotel.html">호텔</a></li>
+    <li><a href="package.html">패키지</a></li>
+    <li><a href="car.html">렌터카</a></li>
+    <li><a href="free.html">테마여행</a></li>
+
+  </ul>
+</nav>
+
+<section class="theme-search-section">
+  <form class="theme-search-box">
+    <select>
+      <option value="">테마 선택</option>
+      <option>골프여행</option>
+      <option>놀이공원</option>
+      <option>온천여행</option>
+      <option>식도락</option>
+      <option>트레킹/등산</option>
+      <option>허니문</option>
+      <option>역사탐방</option>
+      <option>액티비티</option>
+    </select>
+    <input type="text" placeholder="키워드(도시, 국가, 테마 등)" />
+    <input type="date" />
+    <button type="submit" class="search-btn">테마여행 검색</button>
+  </form>
+</section>
+<div class="container">
+  <h2>추천 테마여행</h2>
+  <div class="theme-list">
+    <div class="theme-card">
+      <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=600&q=80" alt="골프여행">
+      <div class="theme-info">
+        <div>
+          <div class="theme-title">골프여행</div>
+          <div class="theme-desc">동남아, 일본, 괌 등 인기 골프장 라운딩 패키지!</div>
+        </div>
+        <a href="#" class="theme-btn">상품 보기</a>
+      </div>
+    </div>
+    <div class="theme-card">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="놀이공원">
+      <div class="theme-info">
+        <div>
+          <div class="theme-title">놀이공원 투어</div>
+          <div class="theme-desc">디즈니랜드, 유니버설 등 세계 테마파크 여행!</div>
+        </div>
+        <a href="#" class="theme-btn">상품 보기</a>
+      </div>
+    </div>
+    <div class="theme-card">
+      <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="온천여행">
+      <div class="theme-info">
+        <div>
+          <div class="theme-title">온천여행</div>
+          <div class="theme-desc">일본, 대만, 유럽 등 힐링 온천과 휴식의 시간!</div>
+        </div>
+        <a href="#" class="theme-btn">상품 보기</a>
+      </div>
+    </div>
+    <div class="theme-card">
+      <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80" alt="식도락">
+      <div class="theme-info">
+        <div>
+          <div class="theme-title">식도락 여행</div>
+          <div class="theme-desc">현지 미식, 맛집 투어, 와인&맥주 체험까지!</div>
+        </div>
+        <a href="#" class="theme-btn">상품 보기</a>
+      </div>
+    </div>
+    <div class="theme-card">
+      <img src="https://images.unsplash.com/photo-1468421870903-4df1664ac249?auto=format&fit=crop&w=600&q=80" alt="트레킹">
+      <div class="theme-info">
+        <div>
+          <div class="theme-title">트레킹/등산</div>
+          <div class="theme-desc">알프스, 히말라야, 백두대간 등 명산 트레킹!</div>
+        </div>
+        <a href="#" class="theme-btn">상품 보기</a>
+      </div>
+    </div>
+    <div class="theme-card">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="허니문">
+      <div class="theme-info">
+        <div>
+          <div class="theme-title">허니문</div>
+          <div class="theme-desc">몰디브, 하와이, 유럽 등 로맨틱 신혼여행!</div>
+        </div>
+        <a href="#" class="theme-btn">상품 보기</a>
+      </div>
+    </div>
+    <div class="theme-card">
+      <img src="https://images.unsplash.com/photo-1465156799763-2c087c332922?auto=format&fit=crop&w=600&q=80" alt="역사탐방">
+      <div class="theme-info">
+        <div>
+          <div class="theme-title">역사탐방</div>
+          <div class="theme-desc">유럽, 중국, 이집트 등 세계 문화유산 여행!</div>
+        </div>
+        <a href="#" class="theme-btn">상품 보기</a>
+      </div>
+    </div>
+    <div class="theme-card">
+      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80" alt="액티비티">
+      <div class="theme-info">
+        <div>
+          <div class="theme-title">액티비티</div>
+          <div class="theme-desc">스카이다이빙, 서핑, 스키 등 짜릿한 체험!</div>
+        </div>
+        <a href="#" class="theme-btn">상품 보기</a>
+      </div>
+    </div>
+  </div>
+  <a href="../index.html" class="back-link">&larr; 메인으로 돌아가기</a>
+</div>
+</body>
+
+</html>
