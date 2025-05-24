@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>원광투어 - 호텔 예약</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Square+Round:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Nanum Square Round', 'Noto Sans KR', Arial, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+    }
+    header {
+      background-color: #1996e7;
+      color: white;
+      padding: 28px 0 22px 0;
+      text-align: center;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      box-shadow: 0 2px 8px rgba(25,150,231,0.10);
+    }
+    .hotel-search-section {
+      background: linear-gradient(120deg, #7b2ff2 0%, #1996e7 100%);
+      padding: 64px 0 48px 0;
+      position: relative;
+    }
+    .hotel-search-box {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 32px rgba(25,150,231,0.12);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 32px;
+      position: relative;
+      z-index: 2;
+    }
+    .hotel-search-box input,
+    .hotel-search-box select {
+      font-family: inherit;
+      font-size: 1.05rem;
+      border: none;
+      background: #f5f7fa;
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-right: 14px;
+      min-width: 170px;
+      flex: 1 1 180px;
+      box-sizing: border-box;
+    }
+    .hotel-search-box input:focus,
+    .hotel-search-box select:focus {
+      outline: 2px solid #1996e7;
+    }
+    .hotel-search-box .search-btn {
+      background: #3ed1fe;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      padding: 16px 34px;
+      cursor: pointer;
+      transition: background 0.2s;
+      min-width: 130px;
+    }
+    .hotel-search-box .search-btn:hover {
+      background: #1996e7;
+    }
+    @media (max-width: 900px) {
+      .hotel-search-box {
+        flex-direction: column;
+        gap: 16px;
+        padding: 22px 10px;
+      }
+      .hotel-search-box input,
+      .hotel-search-box select,
+      .hotel-search-box .search-btn {
+        margin-right: 0;
+        width: 100%;
+        min-width: 0;
+      }
+    }
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(25,150,231,0.10);
+      padding: 40px 35px 50px 35px;
+    }
+    h2 {
+      color: #1996e7;
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .hotel-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+    .hotel-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(25,150,231,0.08);
+      overflow: hidden;
+      transition: transform 0.16s, box-shadow 0.16s;
+      border: 1.5px solid #e0eafc;
+      display: flex;
+      flex-direction: column;
+    }
+    .hotel-card:hover {
+      transform: translateY(-6px) scale(1.025);
+      box-shadow: 0 8px 28px rgba(25,150,231,0.15);
+      border-color: #61c0ff;
+    }
+    .hotel-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      filter: brightness(0.98);
+      transition: filter 0.2s;
+    }
+    .hotel-card:hover img {
+      filter: brightness(1.05) saturate(1.1);
+    }
+    .hotel-info {
+      flex: 1;
+      padding: 20px 18px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hotel-title {
+      font-size: 1.13rem;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 8px;
+    }
+    .hotel-location {
+      font-size: 0.98rem;
+      color: #1996e7;
+      margin-bottom: 10px;
+    }
+    .hotel-desc {
+      font-size: 0.97rem;
+      color: #555;
+      margin-bottom: 16px;
+      min-height: 36px;
+    }
+    .hotel-price {
+      color: #1996e7;
+      font-weight: bold;
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+    .reserve-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #1996e7 60%, #61c0ff 100%);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 8px 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      margin-top: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(25,150,231,0.10);
+      transition: background 0.2s;
+    }
+    .reserve-btn:hover {
+      background: linear-gradient(90deg, #61c0ff 0%, #1996e7 100%);
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      color: #1996e7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 700px) {
+      .container { padding: 18px 4vw 30px 4vw; }
+      .hotel-list { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+<header>원광투어 호텔</header>
+<nav>
+  <ul style="display:flex; gap:20px; list-style:none; padding:0;">
+
+    <li><a href="flight.html">항공권</a></li>
+    <li><a href="hotel.html">호텔</a></li>
+    <li><a href="package.html">패키지</a></li>
+    <li><a href="car.html">렌터카</a></li>
+    <li><a href="free.html">테마여행</a></li>
+
+  </ul>
+</nav>
+
+<section class="hotel-search-section">
+  <form class="hotel-search-box">
+    <input type="text" placeholder="어디로 떠나세요?" />
+    <input type="text" placeholder="2025.05.27 ~ 2025.05.28" />
+    <input type="text" placeholder="객실1 · 성인2명" />
+    <button type="submit" class="search-btn">숙소 검색</button>
+  </form>
+</section>
+<div class="container">
+  <h2>나라/지역별 인기 호텔</h2>
+  <div class="hotel-list">
+    <div class="hotel-card">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="일본 도쿄">
+      <div class="hotel-info">
+        <div>
+          <div class="hotel-title">도쿄 파크 호텔</div>
+          <div class="hotel-location">일본 · 도쿄</div>
+          <div class="hotel-desc">도쿄 타워 전망, 지하철 역세권, 가족 여행에 추천!</div>
+        </div>
+        <div>
+          <div class="hotel-price">₩150,000~/1박</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3fd7?auto=format&fit=crop&w=600&q=80" alt="프랑스 파리">
+      <div class="hotel-info">
+        <div>
+          <div class="hotel-title">파리 에펠 그랜드 호텔</div>
+          <div class="hotel-location">프랑스 · 파리</div>
+          <div class="hotel-desc">에펠탑 도보 5분, 유럽 감성 인테리어, 조식 포함</div>
+        </div>
+        <div>
+          <div class="hotel-price">₩210,000~/1박</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <img src="https://images.unsplash.com/photo-1465156799763-2c087c332922?auto=format&fit=crop&w=600&q=80" alt="대한민국 제주">
+      <div class="hotel-info">
+        <div>
+          <div class="hotel-title">제주 오션뷰 리조트</div>
+          <div class="hotel-location">대한민국 · 제주</div>
+          <div class="hotel-desc">탁 트인 바다 전망, 야외 수영장, 가족/커플 인기</div>
+        </div>
+        <div>
+          <div class="hotel-price">₩120,000~/1박</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80" alt="태국 방콕">
+      <div class="hotel-info">
+        <div>
+          <div class="hotel-title">방콕 시암 호텔</div>
+          <div class="hotel-location">태국 · 방콕</div>
+          <div class="hotel-desc">도심 중심, 인피니티 풀, 쇼핑몰 인접</div>
+        </div>
+        <div>
+          <div class="hotel-price">₩90,000~/1박</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <img src="https://images.unsplash.com/photo-1468421870903-4df1664ac249?auto=format&fit=crop&w=600&q=80" alt="스위스 인터라켄">
+      <div class="hotel-info">
+        <div>
+          <div class="hotel-title">인터라켄 마운틴 뷰 호텔</div>
+          <div class="hotel-location">스위스 · 인터라켄</div>
+          <div class="hotel-desc">알프스 뷰, 조용한 자연 속 힐링, 조식 포함</div>
+        </div>
+        <div>
+          <div class="hotel-price">₩250,000~/1박</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="미국 하와이">
+      <div class="hotel-info">
+        <div>
+          <div class="hotel-title">하와이 와이키키 비치 호텔</div>
+          <div class="hotel-location">미국 · 하와이</div>
+          <div class="hotel-desc">해변 바로 앞, 럭셔리 리조트, 허니문 추천</div>
+        </div>
+        <div>
+          <div class="hotel-price">₩320,000~/1박</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="../index.html" class="back-link">&larr; 메인으로 돌아가기</a>
+</div>
+</body>
+
+</html>

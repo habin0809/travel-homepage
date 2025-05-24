@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>원광투어 - 패키지 여행상품</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Square+Round:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Nanum Square Round', 'Noto Sans KR', Arial, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+    }
+    header {
+      background-color: #1996e7;
+      color: white;
+      padding: 28px 0 22px 0;
+      text-align: center;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      box-shadow: 0 2px 8px rgba(25,150,231,0.10);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(25,150,231,0.10);
+      padding: 40px 35px 50px 35px;
+    }
+    h2 {
+      color: #1996e7;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .package-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .package-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(25,150,231,0.08);
+      overflow: hidden;
+      transition: transform 0.16s, box-shadow 0.16s;
+      border: 1.5px solid #e0eafc;
+      display: flex;
+      flex-direction: column;
+    }
+    .package-card:hover {
+      transform: translateY(-6px) scale(1.025);
+      box-shadow: 0 8px 28px rgba(25,150,231,0.15);
+      border-color: #61c0ff;
+    }
+    .package-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      filter: brightness(0.97);
+      transition: filter 0.2s;
+    }
+    .package-card:hover img {
+      filter: brightness(1.05) saturate(1.1);
+    }
+    .package-info {
+      flex: 1;
+      padding: 20px 18px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .package-title {
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 10px;
+    }
+    .package-desc {
+      font-size: 0.97rem;
+      color: #555;
+      margin-bottom: 16px;
+      min-height: 36px;
+    }
+    .package-price {
+      color: #1996e7;
+      font-weight: bold;
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+    .reserve-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #1996e7 60%, #61c0ff 100%);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 8px 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      margin-top: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(25,150,231,0.10);
+      transition: background 0.2s;
+    }
+    .reserve-btn:hover {
+      background: linear-gradient(90deg, #61c0ff 0%, #1996e7 100%);
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      color: #1996e7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 700px) {
+      .container { padding: 18px 4vw 30px 4vw; }
+      .package-list { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+<header>원광투어 패키지</header>
+<nav>
+  <ul style="display:flex; gap:20px; list-style:none; padding:0;">
+
+    <li><a href="flight.html">항공권</a></li>
+    <li><a href="hotel.html">호텔</a></li>
+    <li><a href="package.html">패키지</a></li>
+    <li><a href="car.html">렌터카</a></li>
+    <li><a href="free.html">테마여행</a></li>
+
+  </ul>
+</nav>
+
+<div class="container">
+  <h2>추천 패키지 여행상품</h2>
+  <div class="package-list">
+    <div class="package-card">
+      <img src="https://images.unsplash.com/photo-1465156799763-2c087c332922?auto=format&fit=crop&w=600&q=80" alt="제주도">
+      <div class="package-info">
+        <div>
+          <div class="package-title">제주도 3박 4일 패키지</div>
+          <div class="package-desc">아름다운 자연과 맛집, 관광명소를 한 번에!</div>
+        </div>
+        <div>
+          <div class="package-price">₩399,000~</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="package-card">
+      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80" alt="도쿄">
+      <div class="package-info">
+        <div>
+          <div class="package-title">도쿄/오사카 4일</div>
+          <div class="package-desc">일본의 핫플레이스와 쇼핑, 미식 투어!</div>
+        </div>
+        <div>
+          <div class="package-price">₩599,000~</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="package-card">
+      <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="파리">
+      <div class="package-info">
+        <div>
+          <div class="package-title">유럽 5개국 10일</div>
+          <div class="package-desc">유럽의 명소를 한 번에! 꿈의 여행 코스</div>
+        </div>
+        <div>
+          <div class="package-price">₩2,990,000~</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="package-card">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="호주">
+      <div class="package-info">
+        <div>
+          <div class="package-title">호주 시드니/멜버른 7일</div>
+          <div class="package-desc">오페라하우스, 그레이트오션로드, 와이너리 투어</div>
+        </div>
+        <div>
+          <div class="package-price">₩1,890,000~</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="package-card">
+      <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80" alt="방콕">
+      <div class="package-info">
+        <div>
+          <div class="package-title">태국 방콕/파타야 5일</div>
+          <div class="package-desc">휴양과 액티비티, 맛집이 가득한 동남아 여행</div>
+        </div>
+        <div>
+          <div class="package-price">₩749,000~</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="package-card">
+      <img src="https://images.unsplash.com/photo-1468421870903-4df1664ac249?auto=format&fit=crop&w=600&q=80" alt="스위스">
+      <div class="package-info">
+        <div>
+          <div class="package-title">스위스/이탈리아 8일</div>
+          <div class="package-desc">알프스와 로마, 베네치아까지 로맨틱 여행</div>
+        </div>
+        <div>
+          <div class="package-price">₩2,490,000~</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="package-card">
+      <img src="https://images.unsplash.com/photo-1467271362346-6d087ba7b1a6?auto=format&fit=crop&w=600&q=80" alt="하와이">
+      <div class="package-info">
+        <div>
+          <div class="package-title">하와이 6일</div>
+          <div class="package-desc">에메랄드빛 바다, 럭셔리 리조트, 액티비티</div>
+        </div>
+        <div>
+          <div class="package-price">₩2,390,000~</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="package-card">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="몰디브">
+      <div class="package-info">
+        <div>
+          <div class="package-title">몰디브 5일</div>
+          <div class="package-desc">최고의 허니문, 올인클루시브 리조트</div>
+        </div>
+        <div>
+          <div class="package-price">₩3,290,000~</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="package-card">
+      <img src="https://images.unsplash.com/photo-1465156799763-2c087c332922?auto=format&fit=crop&w=600&q=80" alt="부산">
+      <div class="package-info">
+        <div>
+          <div class="package-title">부산/경주 2박 3일</div>
+          <div class="package-desc">국내 인기 여행지, 바다와 역사 체험</div>
+        </div>
+        <div>
+          <div class="package-price">₩259,000~</div>
+          <a href="#" class="reserve-btn">예약하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="../index.html" class="back-link">&larr; 메인으로 돌아가기</a>
+</div>
+</body>
+
+</html>
